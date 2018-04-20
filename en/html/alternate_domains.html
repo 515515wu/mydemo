@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Alternate Domains &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Localization of Documentation" href="localization.html" />
+    <link rel="prev" title="Badges" href="badges.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="alternate-domains">
+<h1>Alternate Domains<a class="headerlink" href="#alternate-domains" title="Permalink to this headline">¶</a></h1>
+<p>Read the Docs supports a number of custom domains for your convenience. Shorter URLs make everyone happy, and we like making people happy!</p>
+<div class="section" id="subdomain-support">
+<h2>Subdomain Support<a class="headerlink" href="#subdomain-support" title="Permalink to this headline">¶</a></h2>
+<p>Every project has a subdomain that is available to serve its documentation. If you go to &lt;slug&gt;.readthedocs.io, it should show you the latest version of documentation. A good example is <a class="reference external" href="http://pip.readthedocs.io">http://pip.readthedocs.io</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have an old project that has an underscore (_) in the name, it will use a subdomain with a hyphen (-).
+<a class="reference external" href="http://tools.ietf.org/html/rfc1035">RFC 1035</a> has more information on valid subdomains.</p>
+</div>
+</div>
+<div class="section" id="cname-support">
+<h2>CNAME Support<a class="headerlink" href="#cname-support" title="Permalink to this headline">¶</a></h2>
+<p>If you have your own domain, you can still host with us.
+This requires two steps:</p>
+<ul class="simple">
+<li>Add a CNAME record in your DNS that point to our servers <cite>readthedocs.io</cite></li>
+<li>Add a Domain object in the <strong>Project Admin &gt; Domains</strong> page for your project.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Domain</span></code> that should be used is the actual subdomain that you want your docs served on.
+Generally it will be <cite>docs.projectname.org</cite>.</p>
+</div>
+<p>Using pip as an example, <a class="reference external" href="http://www.pip-installer.org">http://www.pip-installer.org</a> resolves, but is hosted on our infrastructure.</p>
+<p>As another example, fabric's dig record looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-&gt;</span> <span class="n">dig</span> <span class="n">docs</span><span class="o">.</span><span class="n">fabfile</span><span class="o">.</span><span class="n">org</span>
+<span class="o">...</span>
+<span class="p">;;</span> <span class="n">ANSWER</span> <span class="n">SECTION</span><span class="p">:</span>
+<span class="n">docs</span><span class="o">.</span><span class="n">fabfile</span><span class="o">.</span><span class="n">org</span><span class="o">.</span>   <span class="mi">7200</span>    <span class="n">IN</span>  <span class="n">CNAME</span>   <span class="n">readthedocs</span><span class="o">.</span><span class="n">io</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We used to map your projects documentation from the subdomain that you pointed your CNAME to.
+This wasn't workable at scale,
+and now we require you to set the domain you want to resolve on your project.</p>
+</div>
+</div>
+<div class="section" id="cname-ssl">
+<h2>CNAME SSL<a class="headerlink" href="#cname-ssl" title="Permalink to this headline">¶</a></h2>
+<p>We don't support SSL for CNAMEs on our side,
+but you can enable support if you have your own server.
+SSL requires having a secret key,
+and if we hosted the key for you,
+it would no longer be secret.</p>
+<p>To enable SSL:</p>
+<ul class="simple">
+<li>Have a server listening on 443 that you control</li>
+<li>Add a domain that you wish to point at Read the Docs</li>
+<li>Enable proxying to us, with a custom <code class="docutils literal notranslate"><span class="pre">X-RTD-SLUG</span></code> header</li>
+</ul>
+<p>An example nginx configuration for pip would look like:</p>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span> <span class="k">server</span> <span class="p">{</span>
+     <span class="kn">server_name</span> <span class="s">docs.pip-installer.org</span><span class="p">;</span>
+     <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+         <span class="kn">proxy_pass</span> <span class="s">https://pip.readthedocs.io:443</span><span class="p">;</span>
+         <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$http_host</span><span class="p">;</span>
+         <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Proto</span> <span class="s">https</span><span class="p">;</span>
+         <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+         <span class="kn">proxy_set_header</span> <span class="s">X-Scheme</span> <span class="nv">$scheme</span><span class="p">;</span>
+<span class="hll">         <span class="kn">proxy_set_header</span> <span class="s">X-RTD-SLUG</span> <span class="s">pip</span><span class="p">;</span>
+</span>         <span class="kn">proxy_connect_timeout</span> <span class="s">10s</span><span class="p">;</span>
+         <span class="kn">proxy_read_timeout</span> <span class="s">20s</span><span class="p">;</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rtfd-org">
+<h2>rtfd.org<a class="headerlink" href="#rtfd-org" title="Permalink to this headline">¶</a></h2>
+<p>You can also use <cite>rtfd.io</cite> and <cite>rtfd.org</cite> for short URLs for Read the Docs. For example, <a class="reference external" href="http://pip.rtfd.io">http://pip.rtfd.io</a> redirects to its documentation page. Any use of <cite>rtfd.io</cite> or <cite>rtfd.org</cite> will simply be redirected to <cite>readthedocs.io</cite>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Alternate Domains</a><ul>
+<li><a class="reference internal" href="#subdomain-support">Subdomain Support</a></li>
+<li><a class="reference internal" href="#cname-support">CNAME Support</a></li>
+<li><a class="reference internal" href="#cname-ssl">CNAME SSL</a></li>
+<li><a class="reference internal" href="#rtfd-org">rtfd.org</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="badges.html" title="previous chapter">Badges</a></li>
+      <li>Next: <a href="localization.html" title="next chapter">Localization of Documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/alternate_domains.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/alternate_domains.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

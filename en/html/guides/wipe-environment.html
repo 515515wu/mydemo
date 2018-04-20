@@ -1,0 +1,116 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Wiping a Build Environment &#8212; y y documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Read the Docs Public API" href="../api.html" />
+    <link rel="prev" title="Removing &#34;Edit on ...&#34; Buttons from Documentation" href="remove-edit-buttons.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="wiping-a-build-environment">
+<h1>Wiping a Build Environment<a class="headerlink" href="#wiping-a-build-environment" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes it happen that your Builds start failing because the build
+environment where the documentation is created is stale or
+broken. This could happen for a couple of different reasons like <cite>pip</cite>
+not upgrading a package properly or a corrupted cached Python package.</p>
+<p>In any of these cases (and many others), the solution could be just
+wiping out the existing build environment files and allow Read the
+Docs to create a new fresh one.</p>
+<p>Follow these steps to wipe the build environment:</p>
+<ul class="simple">
+<li>Go to <strong>Versions</strong></li>
+<li>Click on the <strong>Edit</strong> button of the version you want to wipe on the
+right side of the page</li>
+<li>Go to the bottom of the page and click the <strong>wipe</strong> link, next to
+the &quot;Save&quot; button</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By wiping the documentation build environment, all the <cite>rst</cite>, <cite>md</cite>,
+and code files associated with it will be removed but not the
+documentation already built (<cite>HTML</cite> and <cite>PDF</cite> files). Your
+documentation will still online after wiping the build environment.</p>
+</div>
+<p>Now you can re-build the version with a fresh build environment!</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Guides</a><ul>
+      <li>Previous: <a href="remove-edit-buttons.html" title="previous chapter">Removing &quot;Edit on ...&quot; Buttons from Documentation</a></li>
+      <li>Next: <a href="../api.html" title="next chapter">Read the Docs Public API</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/guides/wipe-environment.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/guides/wipe-environment.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

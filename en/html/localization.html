@@ -1,0 +1,153 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Localization of Documentation &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Version Control System Integration" href="vcs.html" />
+    <link rel="prev" title="Alternate Domains" href="alternate_domains.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="localization-of-documentation">
+<span id="id1"></span><h1>Localization of Documentation<a class="headerlink" href="#localization-of-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This feature only applies to Sphinx documentation. We are working to bring it to our other documentation backends.</p>
+</div>
+<p>Read the Docs supports hosting your docs in multiple languages.
+There are two different things that we support:</p>
+<ul class="simple">
+<li>A single project written in another language</li>
+<li>A project with translations into multiple languages</li>
+</ul>
+<div class="section" id="single-project-in-another-language">
+<h2>Single project in another language<a class="headerlink" href="#single-project-in-another-language" title="Permalink to this headline">¶</a></h2>
+<p>It is easy to set the <em>Language</em> of your project.
+On the project <em>Admin</em> page (or <em>Import</em> page),
+simply select your desired <em>Language</em> from the dropdown.
+This will tell Read the Docs that your project is in the language.
+The language will be represented in the URL for your project.</p>
+<p>For example,
+a project that is in Spanish will have a default URL of <code class="docutils literal notranslate"><span class="pre">/es/latest/</span></code> instead of <code class="docutils literal notranslate"><span class="pre">/en/latest/</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You must commit the <code class="docutils literal notranslate"><span class="pre">.po</span></code> files for Read the Docs to translate your documentation.</p>
+</div>
+</div>
+<div class="section" id="project-with-multiple-translations">
+<h2>Project with multiple translations<a class="headerlink" href="#project-with-multiple-translations" title="Permalink to this headline">¶</a></h2>
+<p>This situation is a bit more complicated.
+To support this,
+you will have one parent project and a number of projects marked as translations of that parent.
+Let's use <code class="docutils literal notranslate"><span class="pre">phpmyadmin</span></code> as an example.</p>
+<p>The main <code class="docutils literal notranslate"><span class="pre">phpmyadmin</span></code> project is the parent for all translations.
+Then you must create a project for each translation,
+for example <code class="docutils literal notranslate"><span class="pre">phpmyadmin-spanish</span></code>.
+You will set the <em>Language</em> for <code class="docutils literal notranslate"><span class="pre">phpmyadmin-spanish</span></code> to <code class="docutils literal notranslate"><span class="pre">Spanish</span></code>.
+In the parent projects <em>Translations</em> page,
+you will say that <code class="docutils literal notranslate"><span class="pre">phpmyadmin-spanish</span></code> is a translation for your project.</p>
+<p>This has the results of serving:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">phpmyadmin</span></code> at <code class="docutils literal notranslate"><span class="pre">http://phpmyadmin.readthedocs.io/en/latest/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">phpmyadmin-spanish</span></code> at <code class="docutils literal notranslate"><span class="pre">http://phpmyadmin.readthedocs.io/es/latest/</span></code></li>
+</ul>
+<p>It also gets included in the Read the Docs flyout:</p>
+<img alt="_images/translation_bar.png" src="_images/translation_bar.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default language of any CNAME will be the language of the project the Domain object was set on. See <a class="reference internal" href="alternate_domains.html"><span class="doc">Alternate Domains</span></a> for more information.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can include multiple translations in the same repository,
+but each project must specify the language to build for those docs.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Localization of Documentation</a><ul>
+<li><a class="reference internal" href="#single-project-in-another-language">Single project in another language</a></li>
+<li><a class="reference internal" href="#project-with-multiple-translations">Project with multiple translations</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="alternate_domains.html" title="previous chapter">Alternate Domains</a></li>
+      <li>Next: <a href="vcs.html" title="next chapter">Version Control System Integration</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/localization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/localization.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

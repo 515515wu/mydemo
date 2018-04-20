@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Getting Started &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Versions" href="versions.html" />
+    <link rel="prev" title="Welcome to Read The Docs" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>This document will show you how to get up and running with Read the Docs.
+You will have your docs imported on Read the Docs in 5 minutes,
+displayed beautifully for the world.</p>
+<p>If you are already using Sphinx or Markdown for your docs, skip ahead to
+<a class="reference internal" href="#import-docs"><span class="std std-ref">Import Your Docs</span></a>.</p>
+<div class="section" id="write-your-docs">
+<h2>Write Your Docs<a class="headerlink" href="#write-your-docs" title="Permalink to this headline">¶</a></h2>
+<p>You have two options for formatting your documentation:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#in-rst"><span class="std std-ref">In reStructuredText</span></a></li>
+<li><a class="reference internal" href="#in-markdown"><span class="std std-ref">In Markdown</span></a></li>
+</ul>
+<div class="section" id="in-restructuredtext">
+<span id="in-rst"></span><h3>In reStructuredText<a class="headerlink" href="#in-restructuredtext" title="Permalink to this headline">¶</a></h3>
+<p>There is <a class="reference external" href="https://www.youtube.com/watch?feature=player_embedded&amp;v=oJsUvBQyHBs">a screencast</a> that will help you get started if you prefer.</p>
+<p><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> is a tool that makes it easy to create beautiful documentation.
+Assuming you have <a class="reference external" href="https://www.python.org/">Python</a> already, <a class="reference external" href="http://sphinx-doc.org/latest/install.html">install Sphinx</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install sphinx sphinx-autobuild
+</pre></div>
+</div>
+<p>Create a directory inside your project to hold your docs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /path/to/project
+$ mkdir docs
+</pre></div>
+</div>
+<p>Run <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> in there:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd docs
+$ sphinx-quickstart
+</pre></div>
+</div>
+<p>This quick start will walk you through creating the basic configuration; in most cases, you
+can just accept the defaults. When it's done, you'll have an <code class="docutils literal notranslate"><span class="pre">index.rst</span></code>, a
+<code class="docutils literal notranslate"><span class="pre">conf.py</span></code> and some other files. Add these to revision control.</p>
+<p>Now, edit your <code class="docutils literal notranslate"><span class="pre">index.rst</span></code> and add some information about your project.
+Include as much detail as you like (refer to the <a class="reference external" href="http://sphinx-doc.org/rest.html">reStructuredText</a> syntax
+or <a class="reference external" href="http://docs.writethedocs.org/guide/writing/beginners-guide-to-docs/#id1">this template</a> if you need help). Build them to see how they look:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make html
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can use <code class="docutils literal notranslate"><span class="pre">sphinx-autobuild</span></code> to auto-reload your docs. Run <code class="docutils literal notranslate"><span class="pre">sphinx-autobuild</span> <span class="pre">.</span> <span class="pre">_build/html</span></code> instead.</p>
+</div>
+<p>Edit your files and rebuild until you like what you see, then commit your changes and push to your public repository.
+Once you have Sphinx documentation in a public repository, you can start using Read the Docs.</p>
+</div>
+<div class="section" id="in-markdown">
+<span id="id1"></span><h3>In Markdown<a class="headerlink" href="#in-markdown" title="Permalink to this headline">¶</a></h3>
+<p>You can use Markdown and reStructuredText in the same Sphinx project.
+We support this natively on Read the Docs, and you can do it locally:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install recommonmark
+</pre></div>
+</div>
+<p>Then in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">recommonmark.parser</span> <span class="kn">import</span> <span class="n">CommonMarkParser</span>
+
+<span class="n">source_parsers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;.md&#39;</span><span class="p">:</span> <span class="n">CommonMarkParser</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">source_suffix</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.rst&#39;</span><span class="p">,</span> <span class="s1">&#39;.md&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Markdown doesn't support a lot of the features of Sphinx,
+like inline markup and directives. However, it works for
+basic prose content. reStructuredText is the preferred
+format for technical documentation, please read <a class="reference external" href="http://ericholscher.com/blog/2016/mar/15/dont-use-markdown-for-technical-docs/">this blog post</a>
+for motivation.</p>
+</div>
+</div>
+</div>
+<div class="section" id="sign-up-and-connect-an-external-account">
+<span id="connect-account"></span><h2>Sign Up and Connect an External Account<a class="headerlink" href="#sign-up-and-connect-an-external-account" title="Permalink to this headline">¶</a></h2>
+<p>If you are going to import a repository from GitHub, Bitbucket or GitLab, you should
+connect your account to your provider first. Connecting your account allows for
+easier importing and enables Read the Docs to configure your repository webhooks
+automatically.</p>
+<p>To connect your account, go to your <em>Settings</em> dashboard and select <em>Connected
+Services</em>. From here, you'll be able to connect to your GitHub, Bitbucket or GitLab
+account. This process will ask you to authorize a connection to Read the Docs,
+that allows us to read information about and clone your repositories.</p>
+</div>
+<div class="section" id="import-your-docs">
+<span id="import-docs"></span><h2>Import Your Docs<a class="headerlink" href="#import-your-docs" title="Permalink to this headline">¶</a></h2>
+<p>To import a repository, visit your <a class="reference external" href="http://readthedocs.org/dashboard">dashboard</a> and click <a class="reference external" href="http://readthedocs.org/dashboard/import">Import</a>.</p>
+<p>If you have a connected account, you will see a list of your repositories that
+we are able to import. To import one of these projects, just click the import
+icon next to the repository you'd like to import. This will bring up a form that
+is already filled with your project's information. Feel free to edit any of
+these properties, and the click <strong>Next</strong> to build your documentation.</p>
+<div class="section" id="manually-import-your-docs">
+<h3>Manually Import Your Docs<a class="headerlink" href="#manually-import-your-docs" title="Permalink to this headline">¶</a></h3>
+<p>If you do not have a connected account, you will need select <strong>Import Manually</strong>
+and enter the information for your repository yourself. You will also need to
+manually configure the webhook for your repository as well. When importing your
+project, you will be asked for the repository URL, along with some other
+information for you new project. The URL is normally the URL or path name you'd
+use to checkout, clone, or branch your repository. Some examples:</p>
+<ul class="simple">
+<li>Git: <code class="docutils literal notranslate"><span class="pre">http://github.com/ericholscher/django-kong.git</span></code></li>
+<li>Mercurial: <code class="docutils literal notranslate"><span class="pre">https://bitbucket.org/ianb/pip</span></code></li>
+<li>Subversion: <code class="docutils literal notranslate"><span class="pre">http://varnish-cache.org/svn/trunk</span></code></li>
+<li>Bazaar: <code class="docutils literal notranslate"><span class="pre">lp:pasta</span></code></li>
+</ul>
+<p>Add an optional homepage URL and some tags, and then click <strong>Next</strong>.</p>
+<p>Once your project is created, you'll need to manually configure the repository
+webhook if you would like to have new changesets to trigger builds for your
+project on Read the Docs. Go to your project's <strong>Integrations</strong> page to
+configure a new webhook, or see <a class="reference internal" href="webhooks.html#webhook-creation"><span class="std std-ref">our steps for webhook creation</span></a> for more information on this process.</p>
+<p>Within a few seconds your code will automatically be fetched from your public repository,
+and the documentation will be built.
+Check out our <a class="reference internal" href="builds.html"><span class="doc">Build Process</span></a> page to learn more about how we build your docs,
+and to troubleshoot any issues that arise.</p>
+<p>Read the Docs will host multiple versions of your code. You can read more about
+how to use this well on our <a class="reference internal" href="versions.html"><span class="doc">Versions</span></a> page.</p>
+<p>If you have any more trouble, don't hesitate to reach out to us. The <a class="reference internal" href="support.html"><span class="doc">Support</span></a> page has more information on getting in touch.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#write-your-docs">Write Your Docs</a><ul>
+<li><a class="reference internal" href="#in-restructuredtext">In reStructuredText</a></li>
+<li><a class="reference internal" href="#in-markdown">In Markdown</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sign-up-and-connect-an-external-account">Sign Up and Connect an External Account</a></li>
+<li><a class="reference internal" href="#import-your-docs">Import Your Docs</a><ul>
+<li><a class="reference internal" href="#manually-import-your-docs">Manually Import Your Docs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Read The Docs</a></li>
+      <li>Next: <a href="versions.html" title="next chapter">Versions</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/getting_started.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/getting_started.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

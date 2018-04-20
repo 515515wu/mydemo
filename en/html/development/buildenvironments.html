@@ -1,0 +1,168 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Build Environments &#8212; y y documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How we use symlinks" href="../symlinks.html" />
+    <link rel="prev" title="Front End Development" href="standards.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="build-environments">
+<h1>Build Environments<a class="headerlink" href="#build-environments" title="Permalink to this headline">¶</a></h1>
+<p>Read the Docs uses container virtualization to encapsulate documentation build
+processes. Each build spins up a new virtual machine using our base image,
+which is an image with the minimum necessary components required to build
+documentation. Virtual machines are limiting in CPU time and memory, which aims
+to reduce excessive usage of build resources.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>Build environments use <a class="reference external" href="http://docker.com">Docker</a> to handle container virtualization. To perform
+any development on the Docker build system, you will need to set up <a class="reference external" href="http://docker.com">Docker</a> on
+your host system. Setup of Docker will vary by system, and so is out of the
+scope of this documentation.</p>
+<p>Once you have Docker set up, you will need to pull down our build image. These
+images are found on our <a class="reference external" href="https://hub.docker.com/r/readthedocs/build/">Docker Hub repository</a>, the source comes from our
+<a class="reference external" href="https://github.com/rtfd/readthedocs-docker-images">container image repo</a>.</p>
+<p>To get started using Docker for build environments, you'll need to pull down at
+least one build image. For example, to pull down our latest image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">readthedocs</span><span class="o">/</span><span class="n">build</span><span class="p">:</span><span class="n">latest</span>
+</pre></div>
+</div>
+<p>The default image used by our build servers is <a href="#id1"><span class="problematic" id="id2">:djangosetting:`DOCKER_IMAGE`</span></a>.
+This would be a good place to start testing as the <code class="docutils literal notranslate"><span class="pre">latest</span></code> version could
+operate differently. See <code class="docutils literal notranslate"><span class="pre">DOCKER_IMAGE</span></code> below for setting this configuration
+option.</p>
+<p>After this image is downloaded, you can update your settings to use the new
+image -- see <a class="reference internal" href="#configuration">Configuration</a>.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>There are several settings used to configure usage of virtual machines:</p>
+<dl class="docutils">
+<dt>DOCKER_ENABLE</dt>
+<dd><p class="first">True/False value used to enable the Docker build environment.</p>
+<p class="last">Default: <a href="#id3"><span class="problematic" id="id4">:djangosetting:`DOCKER_ENABLE`</span></a></p>
+</dd>
+<dt>DOCKER_LIMITS</dt>
+<dd><p class="first">A dictionary of limits to virtual machines. These limits include:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>time</dt>
+<dd>An integer representing the total allowed time limit (in
+seconds) of build processes. This time limit affects the parent
+process to the virtual machine and will force a virtual machine
+to die if a build is still running after the allotted time
+expires.</dd>
+<dt>memory</dt>
+<dd>The maximum memory allocated to the virtual machine. If this
+limit is hit, build processes will be automatically killed.
+Examples: '200m' for 200MB of total memory, or '2g' for 2GB of
+total memory.</dd>
+</dl>
+</div></blockquote>
+<p class="last">Default: <a href="#id5"><span class="problematic" id="id6">:djangosetting:`DOCKER_LIMITS`</span></a></p>
+</dd>
+<dt>DOCKER_IMAGE</dt>
+<dd><p class="first">Tag of a Docker image to use as a base image.</p>
+<p class="last">Default: <a href="#id7"><span class="problematic" id="id8">:djangosetting:`DOCKER_IMAGE`</span></a></p>
+</dd>
+<dt>DOCKER_SOCKET</dt>
+<dd><p class="first">URI of the socket to connect to the Docker daemon. Examples include:
+<code class="docutils literal notranslate"><span class="pre">unix:///var/run/docker.sock</span></code> and <code class="docutils literal notranslate"><span class="pre">tcp://127.0.0.1:2375</span></code>.</p>
+<p class="last">Default: <a href="#id9"><span class="problematic" id="id10">:djangosetting:`DOCKER_SOCKET`</span></a></p>
+</dd>
+<dt>DOCKER_VERSION</dt>
+<dd><p class="first">Version of the API to use for the Docker API client.</p>
+<p class="last">Default: <a href="#id11"><span class="problematic" id="id12">:djangosetting:`DOCKER_VERSION`</span></a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Build Environments</a><ul>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="standards.html" title="previous chapter">Front End Development</a></li>
+      <li>Next: <a href="../symlinks.html" title="next chapter">How we use symlinks</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/buildenvironments.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/development/buildenvironments.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

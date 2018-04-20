@@ -1,0 +1,137 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Conda Support &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Canonical URLs" href="canonical.html" />
+    <link rel="prev" title="Subprojects" href="subprojects.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="conda-support">
+<h1>Conda Support<a class="headerlink" href="#conda-support" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature is in a beta state.
+Please file an <a class="reference external" href="https://github.com/rtfd/readthedocs.org/issues">issue</a> if you find anything wrong.</p>
+</div>
+<p>Read the Docs supports Conda as an environment management tool,
+along with Virtualenv.
+Conda support is useful for people who depend on C libraries,
+and need them installed when building their documentation.</p>
+<p>This work was funded by <a class="reference external" href="https://www.clinicalgraphics.com/">Clinical Graphics</a> -- many thanks for their support of Open Source.</p>
+<div class="section" id="activating-conda">
+<h2>Activating Conda<a class="headerlink" href="#activating-conda" title="Permalink to this headline">¶</a></h2>
+<p>Conda Support is the first feature enabled with <a class="reference internal" href="yaml-config.html"><span class="doc">Read the Docs YAML Config</span></a>.
+You can enable it by creating a <cite>readthedocs.yml</cite> file in the root of your repository with the contents:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">file</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">environment.yml</span>
+</pre></div>
+</div>
+<p>This Conda environment will also have Sphinx and other build time dependencies installed.
+It will use the same order of operations that we support currently:</p>
+<ul class="simple">
+<li>Environment Creation (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span></code>)</li>
+<li>Dependency Installation (Sphinx)</li>
+</ul>
+</div>
+<div class="section" id="custom-installs">
+<h2>Custom Installs<a class="headerlink" href="#custom-installs" title="Permalink to this headline">¶</a></h2>
+<p>If you are running a custom installation of Read the Docs,
+you will need the <code class="docutils literal notranslate"><span class="pre">conda</span></code> executable installed somewhere on your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.
+Because of the way <code class="docutils literal notranslate"><span class="pre">conda</span></code> works,
+we can't safely install it as a normal dependency into the normal Python virtualenv.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Installing conda into a virtualenv will override the <code class="docutils literal notranslate"><span class="pre">activate</span></code> script,
+making it so you can't properly activate that virtualenv anymore.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Conda Support</a><ul>
+<li><a class="reference internal" href="#activating-conda">Activating Conda</a></li>
+<li><a class="reference internal" href="#custom-installs">Custom Installs</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="subprojects.html" title="previous chapter">Subprojects</a></li>
+      <li>Next: <a href="canonical.html" title="next chapter">Canonical URLs</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/conda.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/conda.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

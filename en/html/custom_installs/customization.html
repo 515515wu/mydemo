@@ -1,0 +1,136 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Customizing your install &#8212; y y documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Local VM Install" href="local_rtd_vm.html" />
+    <link rel="prev" title="Info about custom installs" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="customizing-your-install">
+<h1>Customizing your install<a class="headerlink" href="#customizing-your-install" title="Permalink to this headline">¶</a></h1>
+<p>Read the Docs has a lot of <a class="reference internal" href="../settings.html"><span class="doc">Interesting Settings</span></a> that help customize your install.
+This document will outline some of the more useful ways that these can be combined.</p>
+<div class="section" id="have-a-local-settings-file">
+<h2>Have a local settings file<a class="headerlink" href="#have-a-local-settings-file" title="Permalink to this headline">¶</a></h2>
+<p>If you put a file named <code class="docutils literal notranslate"><span class="pre">local_settings.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">readthedocs/settings</span></code> directory, it will override settings available in the base install.</p>
+</div>
+<div class="section" id="adding-your-own-title-to-pages">
+<h2>Adding your own title to pages<a class="headerlink" href="#adding-your-own-title-to-pages" title="Permalink to this headline">¶</a></h2>
+<p>This requires 2 parts of setup. First, you need to add a custom <a href="#id1"><span class="problematic" id="id2">:setting:`TEMPLATE_DIRS`</span></a> setting that points at your template overrides. Then, in those template overrides you have to insert your logo where the normal RTD logo goes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This works for any setting you wish to change.</p>
+</div>
+<p>Example <code class="docutils literal notranslate"><span class="pre">local_settings.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Directory that the project lives in, aka ../..</span>
+<span class="n">SITE_ROOT</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">TEMPLATE_DIRS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">/var/custom_templates/&quot;</span> <span class="o">%</span> <span class="n">SITE_ROOT</span><span class="p">,</span> <span class="c1"># Your custom template directory, before the RTD one to override it.</span>
+    <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/readthedocs/templates/&#39;</span> <span class="o">%</span> <span class="n">SITE_ROOT</span><span class="p">,</span> <span class="c1"># Default RTD template dir</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Example <code class="docutils literal notranslate"><span class="pre">base.html</span></code> in your template overrides:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s2">&quot;/home/docs/checkouts/readthedocs.org/readthedocs/templates/base.html&quot;</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">i18n</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">branding</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="n">trans</span> <span class="s2">&quot;My sweet site&quot;</span> <span class="o">%</span><span class="p">}</span> <span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>You can of course override any block in the template. If there is something that you would like to be able to customize, but isn't currently in a block, please <a class="reference external" href="https://github.com/rtfd/readthedocs.org/issues?sort=created&amp;state=open">submit an issue</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Customizing your install</a><ul>
+<li><a class="reference internal" href="#have-a-local-settings-file">Have a local settings file</a></li>
+<li><a class="reference internal" href="#adding-your-own-title-to-pages">Adding your own title to pages</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Info about custom installs</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Info about custom installs</a></li>
+      <li>Next: <a href="local_rtd_vm.html" title="next chapter">Local VM Install</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/custom_installs/customization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/custom_installs/customization.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

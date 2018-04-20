@@ -1,0 +1,242 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Build Process &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Read the Docs features" href="features.html" />
+    <link rel="prev" title="Versions" href="versions.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="build-process">
+<h1>Build Process<a class="headerlink" href="#build-process" title="Permalink to this headline">¶</a></h1>
+<p>Files: <a class="reference external" href="https://github.com/rtfd/readthedocs.org/blob/master/readthedocs/projects/tasks.py">tasks.py</a> - <a class="reference external" href="https://github.com/rtfd/readthedocs.org/tree/master/readthedocs/doc_builder">doc_builder/</a></p>
+<p>Every documentation build has limited resources.
+Our current build limits are:</p>
+<ul class="simple">
+<li>15 minutes</li>
+<li>1GB of memory</li>
+</ul>
+<p>We can increase build limits on a per-project basis,
+if you provide a good reason your documentation needs more resources.</p>
+<p>You can see the current Docker build images that we use in our <a class="reference external" href="https://github.com/rtfd/readthedocs-docker-images">docker repository</a>. <a class="reference external" href="https://hub.docker.com/r/readthedocs/build/">Docker Hub</a> also shows the latest set of images that have been built.</p>
+<p>Currently in production we're using the <code class="docutils literal notranslate"><span class="pre">readthedocs/build:2.0</span></code> docker image as our default image.</p>
+<div class="section" id="how-we-build-documentation">
+<h2>How we build documentation<a class="headerlink" href="#how-we-build-documentation" title="Permalink to this headline">¶</a></h2>
+<p>When we import your documentation, we look at two things first: your <em>Repository URL</em> and the <em>Documentation Type</em>.
+We will clone your repository,
+and then build your documentation using the <em>Documentation Type</em> specified.</p>
+<div class="section" id="sphinx">
+<h3>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h3>
+<p>When you choose <em>Sphinx</em> as your <em>Documentation Type</em>,
+we will first look for a <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> file in your repository.
+If we don't find one,
+we will generate one for you.
+We will look inside a <code class="docutils literal notranslate"><span class="pre">doc</span></code> or <code class="docutils literal notranslate"><span class="pre">docs</span></code> directory first,
+and then look within your entire project.</p>
+<p>Then Sphinx will build any files with an <code class="docutils literal notranslate"><span class="pre">.rst</span></code> extension.</p>
+</div>
+<div class="section" id="mkdocs">
+<h3>MkDocs<a class="headerlink" href="#mkdocs" title="Permalink to this headline">¶</a></h3>
+<p>When you choose <em>Mkdocs</em> as your <em>Documentation Type</em>,
+we will first look for a <code class="docutils literal notranslate"><span class="pre">mkdocs.yml</span></code> file in your repository.
+If we don't find one,
+we will generate one for you.
+We will look inside a <code class="docutils literal notranslate"><span class="pre">doc</span></code> or <code class="docutils literal notranslate"><span class="pre">docs</span></code> directory first,
+and then default to the top-level of your documentation.</p>
+<p>Then MkDocs will build any files with a <code class="docutils literal notranslate"><span class="pre">.md</span></code> extension.
+As MkDocs doesn't support automatic PDF generation,
+Read the Docs cannot create a PDF version of your documentation with the <em>Mkdocs</em> option.</p>
+</div>
+</div>
+<div class="section" id="understanding-what-s-going-on">
+<h2>Understanding what's going on<a class="headerlink" href="#understanding-what-s-going-on" title="Permalink to this headline">¶</a></h2>
+<p>Understanding how Read the Docs builds your project will help you with debugging the problems you have with the site. It should also allow you to take advantage of certain things that happen during the build process.</p>
+<p>The first step of the process is that we check out your code from the repository you have given us. If the code is already checked out, we update the copy to the branch that you have specified in your projects configuration.</p>
+<p>Then we build the proper backend code for the type of documentation you've selected.</p>
+<p>If you have the <em>Install Project</em> option enabled, we will run <code class="docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">install</span></code> on your package, installing it into a virtual environment. You can also define additional packages to install with the <em>Requirements File</em> option.</p>
+<p>When we build your documentation, we run <cite>sphinx-build -b html . _build/html</cite>, where <cite>html</cite> would be replaced with the correct backend. We also create man pages and pdf's automatically based on your project.</p>
+<p>Then these files are copied across to our application servers from the build server. Once on the application servers, they are served from nginx.</p>
+<p>An example in code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">update_docs_from_vcs</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="s1">&#39;setup.py&#39;</span><span class="p">):</span>
+    <span class="n">run</span><span class="p">(</span><span class="s1">&#39;python setup.py install&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">project</span><span class="o">.</span><span class="n">requirements_file</span><span class="p">:</span>
+    <span class="n">run</span><span class="p">(</span><span class="s1">&#39;pip install -r </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">project</span><span class="o">.</span><span class="n">requirements_file</span><span class="p">)</span>
+<span class="n">build_docs</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
+<span class="n">copy_files</span><span class="p">(</span><span class="n">artifact_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="builder-responsibility">
+<h2>Builder Responsibility<a class="headerlink" href="#builder-responsibility" title="Permalink to this headline">¶</a></h2>
+<p>Builders have a very specific job.
+They take the updated source code and generate the correct artifacts.
+The code lives in <code class="docutils literal notranslate"><span class="pre">self.version.project.checkout_path(self.version.slug)</span></code>.
+The artifacts should end up in <code class="docutils literal notranslate"><span class="pre">self.version.project.artifact_path(version=self.version.slug,</span> <span class="pre">type=self.type)</span></code>
+Where <code class="docutils literal notranslate"><span class="pre">type</span></code> is the name of your builder.
+All files that end up in the artifact directory should be in their final form.</p>
+</div>
+<div class="section" id="packages-installed-in-the-build-environment">
+<h2>Packages installed in the build environment<a class="headerlink" href="#packages-installed-in-the-build-environment" title="Permalink to this headline">¶</a></h2>
+<p>The build server does have a select number of C libraries installed, because they are used across a wide array of python projects. We can't install every C library out there, but we try and support the major ones. We currently have the following libraries installed:</p>
+<blockquote>
+<div><ul class="simple">
+<li>doxygen</li>
+<li>LaTeX (texlive-full)</li>
+<li>libevent (libevent-dev)</li>
+<li>dvipng</li>
+<li>graphviz</li>
+<li>libxslt1.1</li>
+<li>libxml2-dev</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="writing-your-own-builder">
+<h2>Writing your own builder<a class="headerlink" href="#writing-your-own-builder" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Builds happen on a server using only the RTD Public API. There is no reason that you couldn't build your own independent builder that wrote into the RTD namespace. The only thing that is currently unsupported there is a saner way than uploading the processed files as a zip.</p>
+</div>
+<p>The documentation build system in RTD is made pluggable, so that you can build out your own backend. If you have a documentation format that isn't currently supported, you can add support by contributing a backend.</p>
+<p>The <span class="xref std std-doc">api/doc_builder</span> API explains the higher level parts of the API that you need to implement. A basic run goes something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">get_backend</span><span class="p">(</span><span class="n">project</span><span class="o">.</span><span class="n">documentation_type</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">force</span><span class="p">:</span>
+    <span class="n">backend</span><span class="o">.</span><span class="n">force</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
+<span class="n">backend</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
+<span class="n">backend</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+    <span class="n">backend</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleting-a-stale-or-broken-build-environment">
+<h2>Deleting a stale or broken build environment<a class="headerlink" href="#deleting-a-stale-or-broken-build-environment" title="Permalink to this headline">¶</a></h2>
+<p>If you're having trouble getting your version to build, try wiping out the existing build/environment files.  On your version list page <code class="docutils literal notranslate"><span class="pre">/projects/[project]/versions</span></code> there is a &quot;Wipe&quot; button that will remove all of the files associated with your documentation build, but not the documentation itself.</p>
+</div>
+<div class="section" id="build-environment">
+<h2>Build environment<a class="headerlink" href="#build-environment" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Sphinx</em> and <em>Mkdocs</em> builders set the following RTD-specific environment variables when building your documentation:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="52%" />
+<col width="23%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Environment variable</td>
+<td>Description</td>
+<td>Example value</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">READTHEDOCS</span></code></td>
+<td>Whether the build is running inside RTD</td>
+<td><code class="docutils literal notranslate"><span class="pre">True</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">READTHEDOCS_VERSION</span></code></td>
+<td>The RTD name of the version which is being built</td>
+<td><code class="docutils literal notranslate"><span class="pre">latest</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">READTHEDOCS_PROJECT</span></code></td>
+<td>The RTD name of the project which is being built</td>
+<td><code class="docutils literal notranslate"><span class="pre">myexampleproject</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Build Process</a><ul>
+<li><a class="reference internal" href="#how-we-build-documentation">How we build documentation</a><ul>
+<li><a class="reference internal" href="#sphinx">Sphinx</a></li>
+<li><a class="reference internal" href="#mkdocs">MkDocs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#understanding-what-s-going-on">Understanding what's going on</a></li>
+<li><a class="reference internal" href="#builder-responsibility">Builder Responsibility</a></li>
+<li><a class="reference internal" href="#packages-installed-in-the-build-environment">Packages installed in the build environment</a></li>
+<li><a class="reference internal" href="#writing-your-own-builder">Writing your own builder</a></li>
+<li><a class="reference internal" href="#deleting-a-stale-or-broken-build-environment">Deleting a stale or broken build environment</a></li>
+<li><a class="reference internal" href="#build-environment">Build environment</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="versions.html" title="previous chapter">Versions</a></li>
+      <li>Next: <a href="features.html" title="next chapter">Read the Docs features</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/builds.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/builds.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Automatic Redirects &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="User-defined Redirects" href="user-defined-redirects.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="automatic-redirects">
+<h1>Automatic Redirects<a class="headerlink" href="#automatic-redirects" title="Permalink to this headline">¶</a></h1>
+<p>Read the Docs supports redirecting certain URLs automatically.
+This is an overview of the set of redirects that are fully supported and will work into the future.</p>
+<div class="section" id="root-url">
+<h2>Root URL<a class="headerlink" href="#root-url" title="Permalink to this headline">¶</a></h2>
+<p>A link to the root of your documentation will redirect to the <em>default version</em>,
+as set in your project settings.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span><span class="o">.</span><span class="n">readthedocs</span><span class="o">.</span><span class="n">io</span> <span class="o">-&gt;</span> <span class="n">pip</span><span class="o">.</span><span class="n">readthedocs</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span>
+<span class="n">www</span><span class="o">.</span><span class="n">pip</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="n">org</span> <span class="o">-&gt;</span> <span class="n">www</span><span class="o">.</span><span class="n">pip</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span>
+</pre></div>
+</div>
+<p>This only works for the root URL, not for internal pages. It's designed to redirect people from <a class="reference external" href="http://pip.readthedocs.io/">http://pip.readthedocs.io/</a> to the default version of your documentation, since serving up a 404 here would be a pretty terrible user experience. (If your &quot;develop&quot; branch was designated as your default version, then it would redirect to <a class="reference external" href="http://pip.readthedocs.io/en/develop">http://pip.readthedocs.io/en/develop</a>.) But, it's not a universal redirecting solution. So, for example, a link to an internal page like <a class="reference external" href="http://pip.readthedocs.io/usage.html">http://pip.readthedocs.io/usage.html</a> doesn't redirect to <a class="reference external" href="http://pip.readthedocs.io/en/latest/usage.html">http://pip.readthedocs.io/en/latest/usage.html</a>.</p>
+<p>The reasoning behind this is that RTD organizes the URLs for docs so that multiple translations and multiple versions of your docs can be organized logically and consistently for all projects that RTD hosts. For the way that RTD views docs, <a class="reference external" href="http://pip.readthedocs.io/en/latest/">http://pip.readthedocs.io/en/latest/</a> is the root directory for your default documentation in English, not <a class="reference external" href="http://pip.readthedocs.io/">http://pip.readthedocs.io/</a>. Just like <a class="reference external" href="http://pip.readthedocs.io/en/develop/">http://pip.readthedocs.io/en/develop/</a> is the root for your development documentation in English.</p>
+<p>Among all the multiple versions of docs, you can choose which is the &quot;default&quot; version for RTD to display, which usually corresponds to the git branch of the most recent official release from your project.</p>
+<div class="section" id="rtfd-org">
+<h3>rtfd.org<a class="headerlink" href="#rtfd-org" title="Permalink to this headline">¶</a></h3>
+<p>Links to rtfd.org are treated the same way as above.
+They redirect the root URL to the default version of the project.
+They are intended to be easy and short for people to type.</p>
+</div>
+</div>
+<div class="section" id="supported-top-level-redirects">
+<h2>Supported Top-Level Redirects<a class="headerlink" href="#supported-top-level-redirects" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These &quot;implicit&quot; redirects are supported for legacy reasons.
+We will not be adding support for any more magic redirects.
+If you want additional redirects,
+they should live at a prefix like <a class="reference internal" href="#page-redirect"><span class="std std-ref">Redirecting to a Page</span></a></p>
+</div>
+<p>The main challenge of URL routing in Read the Docs is handling redirects correctly. Both in the interest of redirecting older URLs that are now obsolete, and in the interest of handling &quot;logical-looking&quot; URLs (leaving out the lang_slug or version_slug shouldn't result in a 404), the following redirects are supported:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span>          <span class="o">-&gt;</span> <span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span>
+<span class="o">/</span><span class="n">en</span><span class="o">/</span>       <span class="o">-&gt;</span> <span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span>
+<span class="o">/</span><span class="n">latest</span><span class="o">/</span>   <span class="o">-&gt;</span> <span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>The language redirect will work for any of the defined <code class="docutils literal notranslate"><span class="pre">LANGUAGE_CODES</span></code> we support.
+The version redirect will work for supported versions.</p>
+</div>
+<div class="section" id="redirecting-to-a-page">
+<span id="page-redirect"></span><h2>Redirecting to a Page<a class="headerlink" href="#redirecting-to-a-page" title="Permalink to this headline">¶</a></h2>
+<p>You can link to a specific page and have it redirect to your default version.
+This is done with the <code class="docutils literal notranslate"><span class="pre">/page/</span></code> URL.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span><span class="o">.</span><span class="n">readthedocs</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">page</span><span class="o">/</span><span class="n">quickstart</span><span class="o">.</span><span class="n">html</span> <span class="o">-&gt;</span> <span class="n">pip</span><span class="o">.</span><span class="n">readthedocs</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">quickstart</span><span class="o">.</span><span class="n">html</span>
+<span class="n">www</span><span class="o">.</span><span class="n">pip</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">page</span><span class="o">/</span><span class="n">quickstart</span><span class="o">.</span><span class="n">html</span> <span class="o">-&gt;</span> <span class="n">www</span><span class="o">.</span><span class="n">pip</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">quickstart</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>This allows you to create links that are always up to date.</p>
+<p>Another way to handle this is the <em>latest</em> version.
+You can set your <code class="docutils literal notranslate"><span class="pre">latest</span></code> version to a specific version and just always link to latest.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Automatic Redirects</a><ul>
+<li><a class="reference internal" href="#root-url">Root URL</a><ul>
+<li><a class="reference internal" href="#rtfd-org">rtfd.org</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#supported-top-level-redirects">Supported Top-Level Redirects</a></li>
+<li><a class="reference internal" href="#redirecting-to-a-page">Redirecting to a Page</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="user-defined-redirects.html" title="previous chapter">User-defined Redirects</a></li>
+      <li>Next: <a href="changelog.html" title="next chapter">Changelog</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/automatic-redirects.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/automatic-redirects.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

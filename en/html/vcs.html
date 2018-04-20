@@ -1,0 +1,184 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Version Control System Integration &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Subprojects" href="subprojects.html" />
+    <link rel="prev" title="Localization of Documentation" href="localization.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="version-control-system-integration">
+<h1>Version Control System Integration<a class="headerlink" href="#version-control-system-integration" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We <span class="xref std std-doc">plan to implement a new approach</span> regarding the Theme Context as a whole,
+although the VCS documentation page will still be valid, we prefer the users to move in that direction.</p>
+</div>
+<p>If you want to integrate editing into your own theme, you will have to declare
+few variables inside your configuration file <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">'html_context'</span></code>
+setting, for the template to use them.</p>
+<p>More information can be found on <a class="reference external" href="http://www.sphinx-doc.org/en/1.5.2/config.html#confval-html_context">Sphinx documentation</a>.</p>
+<div class="section" id="github">
+<h2>GitHub<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h2>
+<p>If you want to integrate GitHub, you can put the following snippet into
+your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">html_context</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;display_github&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># Integrate GitHub</span>
+    <span class="s2">&quot;github_user&quot;</span><span class="p">:</span> <span class="s2">&quot;MyUserName&quot;</span><span class="p">,</span> <span class="c1"># Username</span>
+    <span class="s2">&quot;github_repo&quot;</span><span class="p">:</span> <span class="s2">&quot;MyDoc&quot;</span><span class="p">,</span> <span class="c1"># Repo name</span>
+    <span class="s2">&quot;github_version&quot;</span><span class="p">:</span> <span class="s2">&quot;master&quot;</span><span class="p">,</span> <span class="c1"># Version</span>
+    <span class="s2">&quot;conf_py_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/source/&quot;</span><span class="p">,</span> <span class="c1"># Path in the checkout to the docs root</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">display_github</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/{{ github_user }}/{{ github_repo }}</span>
+    <span class="o">/</span><span class="n">blob</span><span class="o">/</span><span class="p">{{</span> <span class="n">github_version</span> <span class="p">}}{{</span> <span class="n">conf_py_path</span> <span class="p">}}{{</span> <span class="n">pagename</span> <span class="p">}}</span><span class="o">.</span><span class="n">rst</span><span class="s2">&quot;&gt;</span>
+    <span class="n">Show</span> <span class="n">on</span> <span class="n">GitHub</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bitbucket">
+<h2>Bitbucket<a class="headerlink" href="#bitbucket" title="Permalink to this headline">¶</a></h2>
+<p>If you want to integrate Bitbucket, you can put the following snippet into
+your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">html_context</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;display_bitbucket&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># Integrate Bitbucket</span>
+    <span class="s2">&quot;bitbucket_user&quot;</span><span class="p">:</span> <span class="s2">&quot;MyUserName&quot;</span><span class="p">,</span> <span class="c1"># Username</span>
+    <span class="s2">&quot;bitbucket_repo&quot;</span><span class="p">:</span> <span class="s2">&quot;MyDoc&quot;</span><span class="p">,</span> <span class="c1"># Repo name</span>
+    <span class="s2">&quot;bitbucket_version&quot;</span><span class="p">:</span> <span class="s2">&quot;master&quot;</span><span class="p">,</span> <span class="c1"># Version</span>
+    <span class="s2">&quot;conf_py_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/source/&quot;</span><span class="p">,</span> <span class="c1"># Path in the checkout to the docs root</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">display_bitbucket</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://bitbucket.org/{{ bitbucket_user }}/{{ bitbucket_repo }}</span>
+    <span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="p">{{</span> <span class="n">bitbucket_version</span><span class="p">}}{{</span> <span class="n">conf_py_path</span> <span class="p">}}{{</span> <span class="n">pagename</span> <span class="p">}}</span><span class="o">.</span><span class="n">rst</span><span class="s1">&#39;&quot;</span>
+    <span class="n">class</span><span class="o">=</span><span class="s2">&quot;icon icon-bitbucket&quot;</span><span class="o">&gt;</span> <span class="n">Edit</span> <span class="n">on</span> <span class="n">Bitbucket</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gitlab">
+<h2>Gitlab<a class="headerlink" href="#gitlab" title="Permalink to this headline">¶</a></h2>
+<p>If you want to integrate Gitlab, you can put the following snippet into
+your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">html_context</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;display_gitlab&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># Integrate Gitlab</span>
+    <span class="s2">&quot;gitlab_user&quot;</span><span class="p">:</span> <span class="s2">&quot;MyUserName&quot;</span><span class="p">,</span> <span class="c1"># Username</span>
+    <span class="s2">&quot;gitlab_repo&quot;</span><span class="p">:</span> <span class="s2">&quot;MyDoc&quot;</span><span class="p">,</span> <span class="c1"># Repo name</span>
+    <span class="s2">&quot;gitlab_version&quot;</span><span class="p">:</span> <span class="s2">&quot;master&quot;</span><span class="p">,</span> <span class="c1"># Version</span>
+    <span class="s2">&quot;conf_py_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/source/&quot;</span><span class="p">,</span> <span class="c1"># Path in the checkout to the docs root</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">display_gitlab</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://{{ gitlab_host|default(&quot;</span><span class="n">gitlab</span><span class="o">.</span><span class="n">com</span><span class="s2">&quot;) }}/</span>
+    <span class="p">{{</span> <span class="n">gitlab_user</span> <span class="p">}}</span><span class="o">/</span><span class="p">{{</span> <span class="n">gitlab_repo</span> <span class="p">}}</span><span class="o">/</span><span class="n">blob</span><span class="o">/</span><span class="p">{{</span> <span class="n">gitlab_version</span> <span class="p">}}</span>
+    <span class="p">{{</span> <span class="n">conf_py_path</span> <span class="p">}}{{</span> <span class="n">pagename</span> <span class="p">}}{{</span> <span class="n">suffix</span> <span class="p">}}</span><span class="s2">&quot; class=&quot;</span><span class="n">fa</span> <span class="n">fa</span><span class="o">-</span><span class="n">gitlab</span><span class="s2">&quot;&gt;</span>
+    <span class="n">Edit</span> <span class="n">on</span> <span class="n">GitLab</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-variables">
+<h2>Additional variables<a class="headerlink" href="#additional-variables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'pagename'</span></code> - Sphinx variable representing the name of the page you're on.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Version Control System Integration</a><ul>
+<li><a class="reference internal" href="#github">GitHub</a></li>
+<li><a class="reference internal" href="#bitbucket">Bitbucket</a></li>
+<li><a class="reference internal" href="#gitlab">Gitlab</a></li>
+<li><a class="reference internal" href="#additional-variables">Additional variables</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="localization.html" title="previous chapter">Localization of Documentation</a></li>
+      <li>Next: <a href="subprojects.html" title="next chapter">Subprojects</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/vcs.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/vcs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

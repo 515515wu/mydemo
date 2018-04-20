@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Read the Docs features &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Support" href="support.html" />
+    <link rel="prev" title="Build Process" href="builds.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="read-the-docs-features">
+<h1>Read the Docs features<a class="headerlink" href="#read-the-docs-features" title="Permalink to this headline">¶</a></h1>
+<p>This will serve as a list of all of the features that Read the Docs currently has. Some features are important enough to have their own page in the docs, others will simply be listed here.</p>
+<div class="section" id="github-bitbucket-and-gitlab-integration">
+<h2>GitHub, Bitbucket and GitLab Integration<a class="headerlink" href="#github-bitbucket-and-gitlab-integration" title="Permalink to this headline">¶</a></h2>
+<p>We now support linking by default in the sidebar. It links to the page on your host, which should help people quickly update typos and send pull requests to contribute to project documentation.</p>
+<p>More information can be found in the <a class="reference internal" href="vcs.html"><span class="doc">Version Control System Integration</span></a> page.</p>
+</div>
+<div class="section" id="auto-updating">
+<h2>Auto-updating<a class="headerlink" href="#auto-updating" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="webhooks.html"><span class="doc">Webhooks</span></a> page talks about the different ways you can ping RTD to let us know your project has been updated. We have official support for GitHub, Bitbucket and GitLab, and anywhere else we have a generic post-commit hook that allows you to POST to a URL to get your documentation built.</p>
+</div>
+<div class="section" id="internationalization">
+<h2>Internationalization<a class="headerlink" href="#internationalization" title="Permalink to this headline">¶</a></h2>
+<p>Read the Docs itself is localized, and we support documentation translated into multiple languages. Read more on the <a class="reference internal" href="localization.html"><span class="doc">Localization of Documentation</span></a> and <a class="reference internal" href="i18n.html"><span class="doc">Internationalization</span></a> pages.</p>
+</div>
+<div class="section" id="canonical-urls">
+<h2>Canonical URLs<a class="headerlink" href="#canonical-urls" title="Permalink to this headline">¶</a></h2>
+<p>Canonical URLs give your docs better search performance, by pointing all URLs to one version. This also helps to solve the issues around users landing on outdated versions of documentation.</p>
+<p>More information can be found in the <a class="reference internal" href="canonical.html"><span class="doc">Canonical URLs</span></a> page.</p>
+</div>
+<div class="section" id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h2>
+<p>We can build multiple versions of your documentation. Look on the &quot;Versions&quot; page
+of your project's admin (using the nav on the left) to find a list of available versions
+that we've inferred from the tags and branches in your source control system (according to
+the support matrix below). On the Versions page you can tell us which versions you'd like us
+to build docs for, whether each should be public, protected, or private, and what the default
+version should be (we'll redirect there when someone hits your main project page, e.g.,
+<a class="reference external" href="http://my-project.rtfd.org/">http://my-project.rtfd.org/</a>).</p>
+</div>
+<div class="section" id="version-control-support-matrix">
+<h2>Version Control Support Matrix<a class="headerlink" href="#version-control-support-matrix" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="19%" />
+<col width="21%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">Git</th>
+<th class="head">hg</th>
+<th class="head">bzr</th>
+<th class="head">svn</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Tags</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Branches</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Default</td>
+<td>master</td>
+<td>default</td>
+<td>&#160;</td>
+<td>trunk</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pdf-generation">
+<h2>PDF Generation<a class="headerlink" href="#pdf-generation" title="Permalink to this headline">¶</a></h2>
+<p>When you build your project on RTD, we automatically build a PDF of your project's documentation. We also build them for every version that you upload, so we can host the PDFs of your latest documentation, as well as your latest stable releases as well.</p>
+</div>
+<div class="section" id="search">
+<h2>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<p>We provide full-text search across all of the pages of documentation hosted on our site. This uses the excellent Haystack project and Elasticsearch as the search backend. We hope to be integrating this into the site more fully in the future.</p>
+</div>
+<div class="section" id="alternate-domains">
+<h2>Alternate Domains<a class="headerlink" href="#alternate-domains" title="Permalink to this headline">¶</a></h2>
+<p>We provide support for CNAMEs, subdomains, and a shorturl for your project as well. This is outlined in the <a class="reference internal" href="alternate_domains.html"><span class="doc">Alternate Domains</span></a> section.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Read the Docs features</a><ul>
+<li><a class="reference internal" href="#github-bitbucket-and-gitlab-integration">GitHub, Bitbucket and GitLab Integration</a></li>
+<li><a class="reference internal" href="#auto-updating">Auto-updating</a></li>
+<li><a class="reference internal" href="#internationalization">Internationalization</a></li>
+<li><a class="reference internal" href="#canonical-urls">Canonical URLs</a></li>
+<li><a class="reference internal" href="#versions">Versions</a></li>
+<li><a class="reference internal" href="#version-control-support-matrix">Version Control Support Matrix</a></li>
+<li><a class="reference internal" href="#pdf-generation">PDF Generation</a></li>
+<li><a class="reference internal" href="#search">Search</a></li>
+<li><a class="reference internal" href="#alternate-domains">Alternate Domains</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="builds.html" title="previous chapter">Build Process</a></li>
+      <li>Next: <a href="support.html" title="next chapter">Support</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/features.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/features.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

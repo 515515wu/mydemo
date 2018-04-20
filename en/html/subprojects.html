@@ -1,0 +1,133 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Subprojects &#8212; y y documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Conda Support" href="conda.html" />
+    <link rel="prev" title="Version Control System Integration" href="vcs.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="subprojects">
+<h1>Subprojects<a class="headerlink" href="#subprojects" title="Permalink to this headline">¶</a></h1>
+<p>Projects can be configured in a nested manner, by configuring a project as a
+<em>subproject</em> of another project. This allows for documentation projects to share
+a search index and a namespace or custom domain, but still be maintained
+independently.</p>
+<p>For example, a parent project, <code class="docutils literal notranslate"><span class="pre">Foo</span></code> is set up with a subproject, <code class="docutils literal notranslate"><span class="pre">Bar</span></code>. The
+documentation for <code class="docutils literal notranslate"><span class="pre">Foo</span></code> will be available at:</p>
+<p><a class="reference external" href="https://foo.readthedocs.io/en/latest/">https://foo.readthedocs.io/en/latest/</a></p>
+<p>The documentation for <code class="docutils literal notranslate"><span class="pre">Bar</span></code> will be available under this same path:</p>
+<p><a class="reference external" href="https://foo.readthedocs.io/projects/bar/en/latest/">https://foo.readthedocs.io/projects/bar/en/latest/</a></p>
+<div class="section" id="adding-a-subproject">
+<h2>Adding a Subproject<a class="headerlink" href="#adding-a-subproject" title="Permalink to this headline">¶</a></h2>
+<p>In the admin dashboard for your project, select &quot;Subprojects&quot; from the menu.
+From this page you can add a subproject by typing in the project slug.</p>
+</div>
+<div class="section" id="sharing-a-custom-domain">
+<h2>Sharing a Custom Domain<a class="headerlink" href="#sharing-a-custom-domain" title="Permalink to this headline">¶</a></h2>
+<p>Projects and subprojects can also be used to share a custom domain with a number
+of projects. To configure this, one project should be established as the parent
+project. This project will be configured with a custom domain. Projects can then
+be added as subprojects to this parent project.</p>
+<p>If the example project <code class="docutils literal notranslate"><span class="pre">Foo</span></code> was set up with a custom domain,
+<code class="docutils literal notranslate"><span class="pre">docs.example.com</span></code>, the URLs for projects <code class="docutils literal notranslate"><span class="pre">Foo</span></code> and <code class="docutils literal notranslate"><span class="pre">Bar</span></code> would
+respectively be at: <a class="reference external" href="http://docs.example.com/en/latest/">http://docs.example.com/en/latest/</a> and
+<a class="reference external" href="http://docs.example.com/projects/bar/en/latest/">http://docs.example.com/projects/bar/en/latest/</a></p>
+</div>
+<div class="section" id="search">
+<h2>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<p>Projects that are configured as subprojects will share a search index with their
+parent and sibling projects. This is currently the only way to share search
+indexes between projects, we do not yet support sharing search indexes between
+arbitrary projects.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Subprojects</a><ul>
+<li><a class="reference internal" href="#adding-a-subproject">Adding a Subproject</a></li>
+<li><a class="reference internal" href="#sharing-a-custom-domain">Sharing a Custom Domain</a></li>
+<li><a class="reference internal" href="#search">Search</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="vcs.html" title="previous chapter">Version Control System Integration</a></li>
+      <li>Next: <a href="conda.html" title="next chapter">Conda Support</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/subprojects.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, y.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/subprojects.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

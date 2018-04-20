@@ -19,14 +19,14 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'mydemo'
-copyright = u'2018, wupeng'
-author = u'wupeng'
+project = u'y'
+copyright = u'2018, y'
+author = u'y'
 
 # The short X.Y version
 version = u''
 # The full version, including alpha/beta/rc tags
-release = u''
+release = u'y'
 
 
 # -- General configuration ---------------------------------------------------
@@ -42,7 +42,7 @@ extensions = [
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['ytemplates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -58,7 +58,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = u'y'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -85,7 +85,7 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['ystatic']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -101,7 +101,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'mydemodoc'
+htmlhelp_basename = 'ydoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -128,8 +128,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'mydemo.tex', u'mydemo Documentation',
-     u'wupeng', 'manual'),
+    (master_doc, 'y.tex', u'y Documentation',
+     u'y', 'manual'),
 ]
 
 
@@ -138,7 +138,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'mydemo', u'mydemo Documentation',
+    (master_doc, 'y', u'y Documentation',
      [author], 1)
 ]
 
@@ -149,7 +149,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'mydemo', u'mydemo Documentation',
-     author, 'mydemo', 'One line description of project.',
+    (master_doc, 'y', u'y Documentation',
+     author, 'y', 'One line description of project.',
      'Miscellaneous'),
 ]
